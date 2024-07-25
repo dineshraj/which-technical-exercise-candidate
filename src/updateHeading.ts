@@ -1,0 +1,33 @@
+import { heading, direction } from './types';
+
+export default (currentHeading: heading, nextDirection: direction) => {
+  if (nextDirection === 'forward') {
+    return currentHeading;
+  }
+
+  switch (nextDirection) {
+    case 'left':
+      switch (currentHeading) {
+        case 'north':
+          return 'west';
+        case 'west':
+          return 'south';
+        case 'south':
+          return 'east';
+        case 'east':
+          return 'south';
+      }
+      break;
+    case 'right':
+      switch (currentHeading) {
+        case 'north':
+          return 'east';
+        case 'east':
+          return 'south';
+        case 'south':
+          return 'west';
+        case 'west':
+          return 'north';
+      }
+  }
+};
