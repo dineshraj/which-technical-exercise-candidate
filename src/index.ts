@@ -2,7 +2,7 @@ import { readFileSync } from 'fs';
 import updateHeading from './updateHeading';
 import { heading, direction } from './types';
 
-const validDirections: Array<direction> = ['forward', 'left', 'right'];
+// const validDirections: Array<direction> = ['forward', 'left', 'right'];
 
 interface Arena {
   corner1: {

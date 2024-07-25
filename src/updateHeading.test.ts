@@ -1,5 +1,8 @@
 import { describe, expect, test } from '@jest/globals';
-import { updateHeading } from './index';
+import updateHeading from './updateHeading';
+import { heading } from './types';
+
+// @TODO: Make generic testing function
 
 describe('Update heading', () => {
   test('returns the same heading if the path is "forwards"', () => {

@@ -16,8 +16,9 @@ export default (currentHeading: heading, nextDirection: direction) => {
           return 'east';
         case 'east':
           return 'south';
+        default:
+          return;
       }
-      break;
     case 'right':
       switch (currentHeading) {
         case 'north':
@@ -28,6 +29,8 @@ export default (currentHeading: heading, nextDirection: direction) => {
           return 'west';
         case 'west':
           return 'north';
+        default:
+          return;
       }
   }
 };
