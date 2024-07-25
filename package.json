@@ -8,7 +8,7 @@
   "directories": {},
   "scripts": {
     "build": "npx tsc -p tsconfig.build.json",
-    "robot": "node dist/index.js",
+    "robot": "NODE_ENV=production node dist/index.js",
     "lint": "eslint src --ext .ts --fix",
     "lint-nofix": "eslint src --ext .ts",
     "submit": "npm run submit-package && npm run submit-send",
