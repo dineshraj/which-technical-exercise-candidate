@@ -12,7 +12,7 @@ const checkMovement = (
 ) => {
   const [newCoordinates, newStatus] = updateCoordinates(currentCoordinates, direction, heading, arena);
 
-  expect(expectedCoordinates).toEqual(newCoordinates);
+  expect(expectedCoordinates).toStrictEqual(newCoordinates);
   expect(newStatus).toBe(status);
 };
 
@@ -31,15 +31,11 @@ describe('Update coordinates', () => {
   describe('valid paths', () => {
     describe('no movement', () => {
       test('does not change coordinates when turning left', () => {
-        const currentCoordinates: Coords = { x: 1, y: 4 };
-        const newCoordinates = updateCoordinates(currentCoordinates, 'left', 'east', arena);
-        expect(newCoordinates).toEqual([currentCoordinates, 'ok']);
+        checkMovement({ x: 1, y: 4 }, { x: 1, y: 4 }, 'ok', 'left', 'north', arena);
       });
 
       test('does not change coordinates when turning right', () => {
-        const currentCoordinates: Coords = { x: 1, y: 4 };
-        const newCoordinates = updateCoordinates(currentCoordinates, 'right', 'east', arena);
-        expect(newCoordinates).toEqual([currentCoordinates, 'ok']);
+        checkMovement({ x: 1, y: 4 }, { x: 1, y: 4 }, 'ok', 'right', 'north', arena);
       });
     });
 

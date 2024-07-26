@@ -1,9 +1,9 @@
 import { readFileSync } from 'fs';
 import updateHeading from './helpers/updateHeading';
 import updateCoordinates from './helpers/updateCoordinates';
-import { Heading, Coords, Direction, Input, Status } from './types';
+import { Heading, Coords, Direction, Input, Status, Output } from './types';
 
-const runWith = ({ arena, location, heading, directions }: Input) => {
+const runWith = ({ arena, location, heading, directions }: Input): Output => {
   const pathsTaken: Array<Direction> = [];
   let currentCoords: Coords = location;
   let currentHeading: Heading = heading;

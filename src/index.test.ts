@@ -9,7 +9,7 @@ function endtoEndTest(name: string) {
     const input = loadJson('input.json');
     const expected = loadJson('expected.json');
 
-    expect(runWith(input)).toEqual(expected);
+    expect(runWith(input)).toStrictEqual(expected);
   });
 }
 

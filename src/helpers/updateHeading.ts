@@ -1,12 +1,6 @@
-import { Heading, Direction } from '../types';
+import { Heading, Direction, HeadingMap } from '../types';
 
-type HeadingMap = {
-  [direction in 'left' | 'right']: {
-    [heading in Heading]: Heading;
-  };
-};
-
-const headingMap: HeadingMap = {
+const headingMap = {
   left: {
     north: 'west',
     south: 'east',
@@ -19,7 +13,7 @@ const headingMap: HeadingMap = {
     east: 'south',
     west: 'north',
   },
-};
+} as HeadingMap;
 
 const updateHeading = (currentHeading: Heading, nextDirection: Direction): Heading => {
   if (nextDirection === 'forward') {
