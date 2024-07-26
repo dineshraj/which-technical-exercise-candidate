@@ -1,7 +1,7 @@
 export type Heading = 'north' | 'south' | 'east' | 'west';
 export type Direction = 'forward' | 'left' | 'right';
 export type Status = 'ok' | 'error' | 'crash';
-export type Arena = {
+export interface Arena {
   corner1: {
     x: number;
     y: number;
@@ -10,5 +10,17 @@ export type Arena = {
     x: number;
     y: number;
   };
-};
-export type Coords = [number, number];
+}
+export interface Coords {
+  x: number;
+  y: number;
+}
+export interface Input {
+  arena: Arena;
+  location: {
+    x: number;
+    y: number;
+  };
+  heading: Heading;
+  directions: Array<Direction>;
+}

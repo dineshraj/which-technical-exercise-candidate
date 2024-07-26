@@ -1,21 +1,11 @@
 import { readFileSync } from 'fs';
 import updateHeading from './helpers/updateHeading';
 import updateCoordinates from './helpers/updateCoordinates';
-import { Heading, Coords, Direction, Arena, Status } from './types';
-
-interface Input {
-  arena: Arena;
-  location: {
-    x: number;
-    y: number;
-  };
-  heading: Heading;
-  directions: Array<Direction>;
-}
+import { Heading, Coords, Direction, Input, Status } from './types';
 
 const runWith = ({ arena, location, heading, directions }: Input) => {
   const pathsTaken: Array<Direction> = [];
-  let currentCoords: Coords = [location.x, location.y];
+  let currentCoords: Coords = location;
   let currentHeading: Heading = heading;
   let currentStatus: Status = 'ok';
 
@@ -36,10 +26,7 @@ const runWith = ({ arena, location, heading, directions }: Input) => {
 
   return {
     status: currentStatus,
-    location: {
-      x: currentCoords[0],
-      y: currentCoords[1],
-    },
+    location: currentCoords,
     heading: currentHeading,
     path: pathsTaken,
   };
