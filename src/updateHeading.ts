@@ -1,6 +1,6 @@
-import { heading, direction } from './types';
+import { Heading, Direction } from './types';
 
-export default (currentHeading: heading, nextDirection: direction) => {
+export default (currentHeading: Heading, nextDirection: Direction) => {
   if (nextDirection === 'forward') {
     return currentHeading;
   }

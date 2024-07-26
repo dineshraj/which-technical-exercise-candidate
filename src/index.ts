@@ -1,19 +1,8 @@
 import { readFileSync } from 'fs';
 import updateHeading from './updateHeading';
-import { heading, direction } from './types';
+import { Heading, Direction, Arena } from './types';
 
 // const validDirections: Array<direction> = ['forward', 'left', 'right'];
-
-interface Arena {
-  corner1: {
-    x: number;
-    y: number;
-  };
-  corner2: {
-    x: number;
-    y: number;
-  };
-}
 
 interface Input {
   arena: Arena;
@@ -21,8 +10,8 @@ interface Input {
     x: number;
     y: number;
   };
-  heading: heading;
-  directions: Array<direction>;
+  heading: Heading;
+  directions: Array<Direction>;
 }
 
 const runWith = (input: Input) => {
