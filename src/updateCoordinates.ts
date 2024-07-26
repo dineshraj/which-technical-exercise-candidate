@@ -1,8 +1,13 @@
-import { Coords, Direction, Heading, Arena } from './types';
+import { Coords, Direction, Heading, Arena, Status } from './types';
 
-export default ([x, y]: Coords, nextDirection: Direction, heading: Heading, { corner1, corner2 }: Arena) => {
+export default (
+  [x, y]: Coords,
+  nextDirection: Direction,
+  heading: Heading,
+  { corner1, corner2 }: Arena
+): [Coords, Status] => {
   if (nextDirection === 'left' || nextDirection === 'right') {
-    return [x, y];
+    return [[x, y], 'ok'];
   }
 
   switch (heading) {

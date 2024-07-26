@@ -32,13 +32,13 @@ describe('Update coordinates', () => {
       test('does not change coordinates when turning left', () => {
         const currentCoordinates: Coords = [1, 4];
         const newCoordinates = updateCoordinates(currentCoordinates, 'left', 'east', arena);
-        expect(newCoordinates).toEqual(currentCoordinates);
+        expect(newCoordinates).toEqual([currentCoordinates, 'ok']);
       });
 
       test('does not change coordinates when turning right', () => {
         const currentCoordinates: Coords = [1, 4];
         const newCoordinates = updateCoordinates(currentCoordinates, 'right', 'east', arena);
-        expect(newCoordinates).toEqual(currentCoordinates);
+        expect(newCoordinates).toEqual([currentCoordinates, 'ok']);
       });
     });
 

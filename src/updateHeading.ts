@@ -1,6 +1,6 @@
 import { Heading, Direction } from './types';
 
-export default (currentHeading: Heading, nextDirection: Direction) => {
+export default (currentHeading: Heading, nextDirection: Direction): Heading => {
   if (nextDirection === 'forward') {
     return currentHeading;
   }
@@ -15,9 +15,9 @@ export default (currentHeading: Heading, nextDirection: Direction) => {
         case 'south':
           return 'east';
         case 'east':
-          return 'south';
+          return 'north';
         default:
-          return;
+          return currentHeading;
       }
     case 'right':
       switch (currentHeading) {
@@ -30,7 +30,7 @@ export default (currentHeading: Heading, nextDirection: Direction) => {
         case 'west':
           return 'north';
         default:
-          return;
+          return currentHeading;
       }
   }
 };
