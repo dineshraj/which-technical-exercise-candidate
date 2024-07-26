@@ -48,7 +48,12 @@ const runWith = ({ arena, location, heading, directions }: Input) => {
 if (process.env.NODE_ENV === 'production') {
   try {
     const json = JSON.parse(readFileSync(process.stdin.fd, 'utf8'));
-    runWith(json);
+    const output = runWith(json);
+    try {
+      process.stdout.write(`${JSON.stringify(output, null, 2)}\n`);
+    } catch (e) {
+      console.error('Error writing to stdout', e);
+    }
   } catch (e) {
     console.error('Error reading from stdin', e);
   }
