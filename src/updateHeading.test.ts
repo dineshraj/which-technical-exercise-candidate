@@ -1,47 +1,35 @@
 import { describe, expect, test } from '@jest/globals';
 import updateHeading from './updateHeading';
-import { Heading } from './types';
+import { Heading, Direction } from './types';
 
 // @TODO: Make generic testing function)
+const checkHeading = (currentHeading: Heading, nextMovement: Direction, expectedHeading: Heading) => {
+  const newHeading = updateHeading(currentHeading, nextMovement);
+  expect(newHeading).toBe(expectedHeading);
+};
 
 describe('Update heading', () => {
   test('returns the same heading if the path is "forwards"', () => {
-    const currentHeading = 'west';
-    const nextMovement = 'forward';
-    const newHeading = updateHeading(currentHeading, nextMovement);
-
-    expect(newHeading).toBe(currentHeading);
+    checkHeading('west', 'forward', 'west');
   });
 
   describe('the next movement is left', () => {
     const nextMovement = 'left';
 
     test('returns west if the current heading is north', () => {
-      const currentHeading = 'north';
-      const newHeading = updateHeading(currentHeading, nextMovement);
-
-      expect(newHeading).toBe('west');
+      checkHeading('north', nextMovement, 'west');
     });
 
     test('returns south if the current heading is west', () => {
-      const currentHeading = 'west';
-      const newHeading = updateHeading(currentHeading, nextMovement);
-
-      expect(newHeading).toBe('south');
+      checkHeading('west', nextMovement, 'south');
     });
 
     test('returns east if the current heading is south', () => {
-      const currentHeading = 'west';
-      const newHeading = updateHeading(currentHeading, nextMovement);
-
-      expect(newHeading).toBe('south');
+      checkHeading('south', nextMovement, 'east');
     });
 
     test('returns north if the current heading is east', () => {
-      const currentHeading = 'west';
-      const newHeading = updateHeading(currentHeading, nextMovement);
-
-      expect(newHeading).toBe('south');
+      checkHeading('east', nextMovement, 'north');
     });
   });
 
@@ -49,31 +37,19 @@ describe('Update heading', () => {
     const nextMovement = 'right';
 
     test('returns east if the current heading is north', () => {
-      const currentHeading = 'north';
-      const newHeading = updateHeading(currentHeading, nextMovement);
-
-      expect(newHeading).toBe('east');
+      checkHeading('north', nextMovement, 'east');
     });
 
     test('returns south if the current heading is east', () => {
-      const currentHeading = 'east';
-      const newHeading = updateHeading(currentHeading, nextMovement);
-
-      expect(newHeading).toBe('south');
+      checkHeading('east', nextMovement, 'south');
     });
 
     test('returns west if the current heading is south', () => {
-      const currentHeading = 'south';
-      const newHeading = updateHeading(currentHeading, nextMovement);
-
-      expect(newHeading).toBe('west');
+      checkHeading('south', nextMovement, 'west');
     });
 
     test('returns north if the current heading is west', () => {
-      const currentHeading = 'west';
-      const newHeading = updateHeading(currentHeading, nextMovement);
-
-      expect(newHeading).toBe('north');
+      checkHeading('west', nextMovement, 'north');
     });
   });
 });
