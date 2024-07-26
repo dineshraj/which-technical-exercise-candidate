@@ -1,6 +1,6 @@
 import { readFileSync } from 'fs';
-import updateHeading from './updateHeading';
-import updateCoordinates from '././updateCoordinates';
+import updateHeading from './helpers/updateHeading';
+import updateCoordinates from './helpers/updateCoordinates';
 import { Heading, Coords, Direction, Arena, Status } from './types';
 
 interface Input {

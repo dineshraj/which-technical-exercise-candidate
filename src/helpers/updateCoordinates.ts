@@ -1,4 +1,4 @@
-import { Coords, Direction, Heading, Arena, Status } from './types';
+import { Coords, Direction, Heading, Arena, Status } from '../types';
 
 export default (
   [x, y]: Coords,

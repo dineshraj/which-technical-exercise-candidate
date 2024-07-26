@@ -1,6 +1,6 @@
 import { describe, expect, test } from '@jest/globals';
 import updateHeading from './updateHeading';
-import { Heading, Direction } from './types';
+import { Heading, Direction } from '../types';
 
 // @TODO: Make generic testing function)
 const checkHeading = (currentHeading: Heading, nextMovement: Direction, expectedHeading: Heading) => {

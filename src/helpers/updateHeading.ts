@@ -1,4 +1,4 @@
-import { Heading, Direction } from './types';
+import { Heading, Direction } from '../types';
 
 type HeadingMap = {
   [direction in 'left' | 'right']: {

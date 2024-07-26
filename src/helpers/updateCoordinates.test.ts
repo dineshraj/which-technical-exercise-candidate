@@ -1,6 +1,6 @@
 import { describe, expect, test } from '@jest/globals';
 import updateCoordinates from './updateCoordinates';
-import { Coords, Heading, Direction, Status, Arena } from './types';
+import { Coords, Heading, Direction, Status, Arena } from '../types';
 
 const checkMovement = (
   currentCoordinates: Coords,
