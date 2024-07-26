@@ -1,36 +1,30 @@
 import { Heading, Direction } from './types';
 
+type HeadingMap = {
+  [direction in 'left' | 'right']: {
+    [heading in Heading]: Heading;
+  };
+};
+
 export default (currentHeading: Heading, nextDirection: Direction): Heading => {
   if (nextDirection === 'forward') {
     return currentHeading;
   }
 
-  switch (nextDirection) {
-    case 'left':
-      switch (currentHeading) {
-        case 'north':
-          return 'west';
-        case 'west':
-          return 'south';
-        case 'south':
-          return 'east';
-        case 'east':
-          return 'north';
-        default:
-          return currentHeading;
-      }
-    case 'right':
-      switch (currentHeading) {
-        case 'north':
-          return 'east';
-        case 'east':
-          return 'south';
-        case 'south':
-          return 'west';
-        case 'west':
-          return 'north';
-        default:
-          return currentHeading;
-      }
-  }
+  const headingMap: HeadingMap = {
+    left: {
+      north: 'west',
+      south: 'east',
+      east: 'north',
+      west: 'south',
+    },
+    right: {
+      north: 'east',
+      south: 'west',
+      east: 'south',
+      west: 'north',
+    },
+  };
+
+  return headingMap[nextDirection][currentHeading];
 };
