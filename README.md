@@ -223,3 +223,174 @@ We would expect the output to be:
   "path": ["forward", "forward", "forward", "right", "forward", "left", "forward", "forward"]
 }
 ```
+
+# Extension suggestion
+
+## Extended tasks
+
+### Modify your programme to include a second robot
+
+_You do not need to maintain backwards compatability_
+
+Modify your programme so it will take json in the following format
+
+### Status: OK
+
+```json
+{
+  "arena": {
+    "corner1": { "x": -4, "y": -4 },
+    "corner2": { "x": 4, "y": 4 }
+  },
+  "robots": [
+    {
+      "location": { "x": 0, "y": 0 },
+      "heading": "north",
+
+      "directions": ["forward", "right", "forward", "right", "forward", "forward"]
+    },
+    {
+      "location": { "x": -2, "y": 2 },
+      "heading": "north",
+
+      "directions": ["forward", "right", "right", "forward", "forward"]
+    }
+  ]
+}
+```
+
+We would expect the output to be:
+
+```json
+{
+  "robots": [
+    {
+      "status": "ok",
+      "location": { "x": 1, "y": -1 },
+      "heading": "south",
+
+      "path": ["forward", "right", "forward", "right", "forward", "forward"]
+    },
+    {
+      "status": "ok",
+      "location": { "x": -2, "y": 1 },
+      "heading": "south",
+
+      "path": ["forward", "right", "right", "forward", "forward"]
+    }
+  ]
+}
+```
+
+### Status: CRASH
+
+Two robots crash if they occupy the same space
+
+Given the JSON:
+
+```json
+{
+  "arena": {
+    "corner1": { "x": -4, "y": -4 },
+    "corner2": { "x": 4, "y": 4 }
+  },
+  "robots": [
+    {
+      "location": { "x": -2, "y": 0 },
+      "heading": "east",
+
+      "directions": ["forward", "forward"]
+    },
+    {
+      "location": { "x": 1, "y": 0 },
+      "heading": "west",
+
+      "directions": ["forward"]
+    }
+  ]
+}
+```
+
+We would expect the output to be:
+
+```json
+{
+  "robots": [
+    {
+      "status": "crash",
+      "location": { "x": 0, "y": 0 },
+      "heading": "east",
+
+      "path": ["forward", "forward"]
+    },
+    {
+      "status": "crash",
+      "location": { "x": 0, "y": 0 },
+      "heading": "west",
+
+      "path": ["forward"]
+    }
+  ]
+}
+```
+
+### Allow the robots to fire at each other
+
+Create a new direction called `fire` that creates a missile in the space in front of the robot.
+
+This missile will move one unit per direction processed in the direction of the current heading.
+
+- If a missile hits the edge of the arena
+  - it will cease to exist
+- If a missile occupies the same space as a robot
+  - it will cease to exist
+  - the robot's status will return `destroyed`
+  - further directions will not be processed for that robot
+
+Given the JSON:
+
+```json
+{
+  "arena": {
+    "corner1": { "x": -4, "y": -4 },
+    "corner2": { "x": 4, "y": 4 }
+  },
+  "robots": [
+    {
+      "location": { "x": -1, "y": 0 },
+      "heading": "east",
+
+      "directions": ["forward", "fire", "forward", "left"]
+    },
+    {
+      "location": { "x": 3, "y": -1 },
+      "heading": "north",
+
+      "directions": ["forward", "left", "forward", "right"]
+    }
+  ]
+}
+```
+
+We would expect the output to be:
+
+```json
+{
+  "robots": [
+    {
+      "status": "ok",
+      "location": { "x": 1, "y": 0 },
+      "heading": "north",
+
+      "path": ["forward", "fire", "forward", "left"]
+    },
+    {
+      "status": "destroyed",
+      "location": { "x": 2, "y": 0 },
+      "heading": "west",
+
+      "path": ["forward", "left", "forward"]
+    }
+  ]
+}
+```

@@ -11,11 +11,15 @@ export interface Arena {
   corner2: Coords;
 }
 
-export interface Input {
-  arena: Arena;
+interface Robot {
   location: Coords;
   heading: Heading;
   directions: Array<Direction>;
+}
+
+export interface Input {
+  arena: Arena;
+  robots: Array<Robot>;
 }
 
 export interface Output {

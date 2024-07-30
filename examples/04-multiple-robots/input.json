@@ -1,0 +1,20 @@
+{
+  "arena": {
+    "corner1": { "x": -4, "y": -4 },
+    "corner2": { "x": 4, "y": 4 }
+  },
+  "robots": [
+    {
+      "location": { "x": 0, "y": 0 },
+      "heading": "north",
+
+      "directions": ["forward", "right", "forward", "right", "forward", "forward"]
+    },
+    {
+      "location": { "x": -2, "y": 2 },
+      "heading": "north",
+
+      "directions": ["forward", "right", "right", "forward", "forward"]
+    }
+  ]
+}

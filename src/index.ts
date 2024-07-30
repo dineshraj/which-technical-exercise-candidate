@@ -3,33 +3,43 @@ import updateHeading from './helpers/updateHeading';
 import updateCoordinates from './helpers/updateCoordinates';
 import { Heading, Coords, Direction, Input, Status, Output } from './types';
 
-const runWith = ({ arena, location, heading, directions }: Input): Output => {
-  const pathsTaken: Array<Direction> = [];
-  let currentCoords: Coords = location;
-  let currentHeading: Heading = heading;
-  let currentStatus: Status = 'ok';
+const runWith = ({ arena, robots }: Input): { robots: Array<Output> } => {
+  console.log('🚀 ~ runWith ~ robots:', robots);
+  const output: Array<Output> = [];
 
-  directions.forEach((direction) => {
-    if (currentStatus !== 'error' && currentStatus !== 'crash') {
-      pathsTaken.push(direction);
-      if (direction === 'forward') {
-        const [newCoords, newStatus] = updateCoordinates(currentCoords, direction, currentHeading, arena);
-        currentCoords = newCoords;
-        currentStatus = newStatus;
-      } else if (direction === 'left' || direction === 'right') {
-        currentHeading = updateHeading(currentHeading, direction);
-      } else {
-        currentStatus = 'error';
-      }
+  robots.forEach(
+    ({ location, heading, directions }: { location: Coords; heading: Heading; directions: Array<Direction> }) => {
+      const pathsTaken: Array<Direction> = [];
+      let currentCoords: Coords = location;
+      let currentHeading: Heading = heading;
+      let currentStatus: Status = 'ok';
+
+      directions.forEach((direction) => {
+        if (currentStatus !== 'error' && currentStatus !== 'crash') {
+          pathsTaken.push(direction);
+          if (direction === 'forward') {
+            const [newCoords, newStatus] = updateCoordinates(currentCoords, direction, currentHeading, arena);
+            currentCoords = newCoords;
+            currentStatus = newStatus;
+          } else if (direction === 'left' || direction === 'right') {
+            currentHeading = updateHeading(currentHeading, direction);
+          } else {
+            currentStatus = 'error';
+          }
+        }
+      });
+
+      output.push({
+        status: currentStatus,
+        location: currentCoords,
+        heading: currentHeading,
+        path: pathsTaken,
+      });
     }
-  });
+  );
+  console.log('🚀 ~ runWith ~ output:', output);
 
-  return {
-    status: currentStatus,
-    location: currentCoords,
-    heading: currentHeading,
-    path: pathsTaken,
-  };
+  return { robots: output };
 };
 
 if (process.env.NODE_ENV === 'production') {

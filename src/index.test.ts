@@ -14,7 +14,8 @@ function endtoEndTest(name: string) {
 }
 
 describe('Pie-pot the robot', () => {
-  endtoEndTest('01-walk-through');
-  endtoEndTest('02-error');
-  endtoEndTest('03-crash');
+  // endtoEndTest('01-walk-through');
+  // endtoEndTest('02-error');
+  // endtoEndTest('03-crash');
+  endtoEndTest('04-multiple-robots');
 });

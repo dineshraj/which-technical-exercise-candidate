@@ -1,0 +1,18 @@
+{
+  "robots": [
+    {
+      "status": "ok",
+      "location": { "x": 1, "y": -1 },
+      "heading": "south",
+
+      "path": ["forward", "right", "forward", "right", "forward", "forward"]
+    },
+    {
+      "status": "ok",
+      "location": { "x": -2, "y": 1 },
+      "heading": "south",
+
+      "path": ["forward", "right", "right", "forward", "forward"]
+    }
+  ]
+}
